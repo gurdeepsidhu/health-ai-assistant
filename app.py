@@ -1,16 +1,3 @@
-import streamlit as st
-from transformers import pipeline
-
-st.title("Healthy Lifestyle Assistant")
-
-# User inputs
-age = st.text_input("Enter your age")
-weight = st.text_input("Enter your weight")
-goal = st.text_input("Your goal (weight loss / energy / fitness)")
-
-# Hugging Face model
-generator = pipeline('text-generation', model='google/flan-t5-small', device=-1)
-
 if st.button("Generate Health Plan"):
     prompt = f"""
 You are a helpful health and lifestyle assistant.
@@ -30,5 +17,10 @@ Create:
 5. Motivational message
 """
 
-    result = generator(prompt, max_length=250, do_sample=True)
-    st.write(result[0]['generated_text'])
+    # Generate health plan
+    result = generator(prompt, max_length=250, do_sample=True, temperature=0.7)
+    plan = result[0]['generated_text']
+
+    # Show nicely in Streamlit
+    st.subheader("Your Personalized Health Plan")
+    st.write(plan)
