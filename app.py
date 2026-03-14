@@ -8,11 +8,10 @@ age = st.text_input("Enter your age")
 weight = st.text_input("Enter your weight")
 goal = st.text_input("Your goal (weight loss / energy / fitness)")
 
-# Load a free Hugging Face model (text generation)
-generator = pipeline('text2text-generation', model='google/flan-t5-base', device=-1)
+# Load a small Hugging Face model suitable for Streamlit free plan
+generator = pipeline('text2text-generation', model='google/flan-t5-small', device=-1)
 
 if st.button("Generate Health Plan"):
-
     prompt = f"""
 You are a helpful health and lifestyle assistant.
 Give general wellness advice only.
@@ -31,5 +30,5 @@ Create:
 5. Motivational message
 """
 
-   result = generator(prompt, max_length=300)
-st.write(result[0]['generated_text'])
+    result = generator(prompt, max_length=250)
+    st.write(result[0]['generated_text'])
