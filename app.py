@@ -9,7 +9,7 @@ weight = st.text_input("Enter your weight")
 goal = st.text_input("Your goal (weight loss / energy / fitness)")
 
 # Load a free Hugging Face model (text generation)
-generator = pipeline('text-generation', model='tiiuae/falcon-7b-instruct', device=-1)
+generator = pipeline('text-generation', model='google/flan-t5-small', device=-1)
 
 if st.button("Generate Health Plan"):
 
